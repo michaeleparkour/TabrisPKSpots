@@ -1,0 +1,10 @@
+{
+  "name": "pkspots",
+  "description": "PKSpots",
+  "main": "app.js",
+  "dependencies": {
+    "tabris": "^1.2.0",
+    "promise": "^6.1.0",
+    "whatwg-fetch": "^0.7.0"
+  }
+}
