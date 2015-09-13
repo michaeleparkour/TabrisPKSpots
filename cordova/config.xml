@@ -5,7 +5,7 @@
   <plugin name="cordova-plugin-dialogs" version="1.1.1" />
   <plugin name="https://github.com/eclipsesource/tabris-calendar.git" />
   <plugin name="com.eclipsesource.tabris.maps" spec="https://github.com/eclipsesource/tabris-maps.git">
-    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCm_qyXsBbmU1SfByAXFSr6E4pCd4D2k2A" />
+    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyAlljEuofrpqpIGZcriQKCCLsX3gnhtyNs" />
   </plugin>
   <hook src="hooks/api_key_hook.js" type="before_platform_add" />
 </widget>
