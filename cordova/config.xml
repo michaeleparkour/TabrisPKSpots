@@ -4,7 +4,7 @@
   <preference name="Fullscreen" value="true" />
   <plugin name="cordova-plugin-dialogs" version="1.1.1" />
   <plugin name="https://github.com/eclipsesource/tabris-calendar.git" />
-  <plugin name="com.pkspots" spec="https://github.com/michaeleparkour/TabrisPKSpots.git">
+  <plugin name="com.pkspots" spec="https://github.com/eclipsesource/tabris-maps.git">
     <variable name="API_KEY_FOR_ANDROID" value="AIzaSyADvxH8GX0uJ9GzRpvAp8_DiDelw_Pz-hM" />
   </plugin>
   <hook src="hooks/api_key_hook.js" type="before_platform_add" />
