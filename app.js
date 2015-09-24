@@ -51,7 +51,7 @@ var view = tabris.create("CollectionView", {
     loadItems();
 }).appendTo(page);
 function getPosition() {
-    navigator.geolocation.getCurrentPosition(function (location) {
+    cordova.plugins.locationServices.geolocation.getCurrentPosition(function (location) {
         var lat = parseFloat(location.coords.latitude);
         var lng = parseFloat(location.coords.longitude);
         console.log(lat, lng);
@@ -123,8 +123,7 @@ function loadItems() {
         refreshIndicator: true,
         refreshMessage: "loading..."
     });
-    console.log(navigator)
-    //getPosition();
+    getPosition();
 }
 
 function animateInFromRight(widget, delay) {
