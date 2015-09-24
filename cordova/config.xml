@@ -3,7 +3,7 @@
   <name>PKSpots</name>
   <preference name="Fullscreen" value="true" />
   <plugin name="cordova-plugin-dialogs" version="1.1.1" />
-  <plugin name="https://github.com/eclipsesource/tabris-calendar.git" />
+  <plugin name="cordova-plugin-geolocation" />
   <plugin name="com.pkspots" spec="https://github.com/eclipsesource/tabris-maps.git">
     <variable name="API_KEY_FOR_ANDROID" value="AIzaSyADvxH8GX0uJ9GzRpvAp8_DiDelw_Pz-hM" />
   </plugin>
