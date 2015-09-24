@@ -5,7 +5,11 @@ var page = tabris.create("Page", {
     title: "PKSpots",
     topLevel: true
 });
-
+var mapPage = require("./pages/general-map");
+mapPage.create();
+var calendarPage = require("./pages/calendar");
+calendarPage.create();
+var drawer = tabris.create("Drawer");
 var view = tabris.create("CollectionView", {
     layoutData: {
         left: 0,
@@ -72,6 +76,7 @@ function loadItems() {
         console.log('parsing failed', ex)
     });
 }
+
 function animateInFromRight(widget, delay) {
     widget.set({
         opacity: 0.0,
@@ -86,5 +91,7 @@ function animateInFromRight(widget, delay) {
         easing: "ease-out"
     });
 }
+
 loadItems();
+tabris.create("PageSelector").appendTo(drawer);
 page.open();
