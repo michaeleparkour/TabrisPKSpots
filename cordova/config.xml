@@ -3,15 +3,13 @@
   <name>PKSpots</name>
   <platform name="android">
     <preference name="Fullscreen" value="true" />
-    <preference name="orientation" value="portrait" />
+    <preference name="Orientation" value="portrait" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="KeepRunning" value="true" />
     <preference name="DisallowOverscroll" value="false" />
-    <icon src="res/36.png" density="ldpi" />
-    <icon src="res/48.png" density="mdpi" />
-    <icon src="res/72.png" density="hdpi" />
-    <icon src="res/96.png" density="xhdpi" />
   </platform>
-  <plugin name="cordova-plugin-dialogs" version="1.1.1" />
-  <plugin name="https://github.com/mauron85/cordova-plugin-background-geolocation.git" />
+  <plugin name="cordova-plugin-dialogs"/>
+  <plugin name="cordova-plugin-mauron85-background-geolocation" />
+  <plugin name="cordova-plugin-datepicker" />
+  <plugin name="cordova-plugin-file-opener2" />
 </widget>
