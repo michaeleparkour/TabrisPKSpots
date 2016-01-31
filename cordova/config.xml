@@ -13,7 +13,6 @@
   <plugin name="cordova-plugin-fullscreen" />
   <plugin name="cordova-plugin-datepicker" />
   <plugin name="cordova-open" />
-  <plugin name="https://github.com/esri/cordova-plugin-advanced-geolocation.git" />
   <plugin name="cordova-plugin-gpslocation" />
   <plugin name="cordova-plugin-camera" />
   <plugin name="cordova-plugin-imagepicker" />
