@@ -7,10 +7,10 @@
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="KeepRunning" value="true" />
     <preference name="DisallowOverscroll" value="false" />
-    <icon src="../res/36.png" density="ldpi" />
-    <icon src="../res/48.png" density="mdpi" />
-    <icon src="../res/72.png" density="hdpi" />
-    <icon src="../res/96.png" density="xhdpi" />
+    <icon src="res/36.png" density="ldpi" />
+    <icon src="res/48.png" density="mdpi" />
+    <icon src="res/72.png" density="hdpi" />
+    <icon src="res/96.png" density="xhdpi" />
   </platform>
   <plugin name="cordova-plugin-dialogs" version="1.1.1" />
   <plugin name="https://github.com/mauron85/cordova-plugin-background-geolocation.git" />
