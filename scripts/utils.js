@@ -1,6 +1,8 @@
 window.myUtils = {
-    extend: function(obj, src) {
-        Object.keys(src).forEach(function(key) { obj[key] = src[key]; });
+    extend: function (obj, src) {
+        Object.keys(src).forEach(function (key) {
+            obj[key] = src[key];
+        });
         return obj;
     },
     latlng2Distance: function (lat1, long1, lat2, long2) {
@@ -21,24 +23,22 @@ window.myUtils = {
         var ad = Math.atan2(y, x);
         return (ad * R / 1000).toFixed(3);
     },
-    getPosition: function() { return new Promise(function(resolve, reject) {
-            if (window.plugins && window.plugins.GPSLocator){
-                window.plugins.GPSLocator.getLocation(function (location) {
-                    resolve(location);
-                }, function (err) {
-                    reject(err);
-                });
+    getPosition: function () {
+        return new Promise(function (resolve, reject) {
+            if (window.global && window.global.location.latitude) {
+                resolve(true);
             } else {
                 reject(false);
             }
-        })},
-    getPositionByIp: function(){
+        })
+    },
+    getPositionByIp: function () {
         return fetch('http://www.geoplugin.net/json.gp');
     }
 };
 window.PKSpots = {
     API: {
-        getSpotsByLocationAndRadius : function (lat, lng, rad) {
+        getSpotsByLocationAndRadius: function (lat, lng, rad) {
             return fetch('http://pkspots.com/API/spots/loc-and-radius/' + lat + '&' + lng + '&' + rad);
         }
     }

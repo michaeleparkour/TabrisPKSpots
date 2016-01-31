@@ -10,6 +10,11 @@
   </platform>
   <plugin name="cordova-plugin-dialogs"/>
   <plugin name="cordova-plugin-mauron85-background-geolocation" />
+  <plugin name="cordova-plugin-fullscreen" />
   <plugin name="cordova-plugin-datepicker" />
-  <plugin name="cordova-plugin-file-opener2" />
+  <plugin name="cordova-open" />
+  <plugin name="cordova-advanced-geolocation" />
+  <plugin name="cordova-plugin-gpslocation" />
+  <plugin name="cordova-plugin-camera" />
+  <plugin name="cordova-plugin-imagepicker" />
 </widget>

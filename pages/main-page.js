@@ -7,7 +7,7 @@ exports.create = function () {
     function createMainPage() {
         function showSpots(data) {
             for (i = 0; i < data.length; i++) {
-                data[i].distance = myUtils.latlng2Distance(global.location.lat, global.location.lng, data[i].lat, data[i].lng)
+                data[i].distance = myUtils.latlng2Distance(global.location.latitude, global.location.longitude, data[i].lat, data[i].lng)
             }
             around.set({
                 items: data.sort(function (item1, item2) {
@@ -23,7 +23,8 @@ exports.create = function () {
         }
 
         function getSpots() {
-            PKSpots.API.getSpotsByLocationAndRadius(global.location.lat, global.location.lng, global.location.radius).then(function (response) {
+            console.log(global.location.latitude, global.location.longitude, global.location.radius);
+            PKSpots.API.getSpotsByLocationAndRadius(global.location.latitude, global.location.longitude, global.location.radius).then(function (response) {
                 return response.json()
             }).then(function (data) {
                 if (data && data.length < 1) {
@@ -33,11 +34,17 @@ exports.create = function () {
                         'Сообщение',
                         'OK'
                     );
+                    around.set({
+                        refreshIndicator: false
+                    });
                 } else {
                     showSpots(data);
                 }
             }).catch(function (ex) {
-                console.log('parsing failed', ex)
+                console.log('parsing failed bb', ex);
+                around.set({
+                    refreshIndicator: false
+                });
             });
         }
 
@@ -46,18 +53,16 @@ exports.create = function () {
                 refreshIndicator: true,
                 refreshMessage: "loading..."
             });
-            myUtils.getPosition().then(function (location) {
-                var lat = parseFloat(location[0]);
-                var lng = parseFloat(location[1]);
-                global.location = {lat: lat, lng: lng, radius: 500000};
-                console.log(lat, lng);
-                lat && lng && getSpots();
+            myUtils.getPosition().then(function () {
+                getSpots();
             }).catch(function () {
                 myUtils.getPositionByIp().then(function (data) {
                     data = JSON.parse(data._bodyInit);
                     var lat = parseFloat(data.geoplugin_latitude);
                     var lng = parseFloat(data.geoplugin_longitude);
-                    global.location = {lat: lat, lng: lng, radius: 2000};
+                    global.location.latitude = lat;
+                    global.location.longitude = lng;
+                    global.location.radius= 500000;
                     getSpots();
                 }).catch(function (err) {
                     console.log(err)

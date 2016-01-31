@@ -118,32 +118,9 @@ exports.create = function() {
                 textColor: "#FFA636",
                 text: "ПОДРОБНЕЕ"
             }).appendTo(bottom_bar);
-            var ripple = tabris.create('Composite', {
-                layoutData: {
-                    width: 1000,
-                    height: 1000,
-                    centerY: 0,
-                    centerX: 0
-                },
-                background: "rgba(0, 0, 200, 0.2)",
-                transform: {scaleX: 0, scaleY: 0}
-            });
-            ripple.appendTo(cell);
-            ripple.on('animationend', function(widget){
-                widget.set('transform', {scaleX: 0, scaleY: 0});
-            });
             more.on('select', function(){
                 require("../pages/spot-page.js").create(cell.get('item')).open();
             });
-            cell.on('tap', function(){
-                ripple.animate({
-                    transform: {scaleX: 1, scaleY: 1}
-                }, {
-                    duration: 500,
-                    delay: 0,
-                    easing: "ease-in-out"
-                });
-            })
             card_info.appendTo(card);
             cell.on("change:item", function (widget, item) {
                 imageView.set("image", {
@@ -152,7 +129,7 @@ exports.create = function() {
                 item.name ? title.set("text", item.name) : title.set("text", 'No Title');
                 item.category ? category.set("text", item.category) : category.set("text", 'No Category');
                 item.first_name ? author.set("text", item.first_name + ' ' + item.last_name) : author.set("text", 'nobody');
-                distance.set("text", myUtils.latlng2Distance(global.location.lat, global.location.lng, item.lat, item.lng)+ ' км');
+                distance.set("text", myUtils.latlng2Distance(global.location.latitude, global.location.longitude, item.lat, item.lng)+ ' км');
                 animateInFromBottom(widget);
             });
         }

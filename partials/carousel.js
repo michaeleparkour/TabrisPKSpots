@@ -51,6 +51,20 @@ exports.create = function (settings) {
                     image: slide.msrc,
                     scaleMode: settings.imageMode
                 }).appendTo(galleryWrapper);
+                prev_slide.on('tap', function (widget) {
+                    console.log(widget.get('image').src);
+                    cordova.plugins.fileOpener2.open(
+                        widget.get('image').src,
+                        'image/jpeg', {
+                            error: function (e) {
+                                console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                            },
+                            success: function () {
+                                console.log('file opened successfully');
+                            }
+                        }
+                    );
+                });
                 slide_images.push(prev_slide);
             });
 
@@ -105,7 +119,7 @@ exports.create = function (settings) {
         }
 
         Gallery.on("tap", function () {
-            console.log(active_slide,lastPosition, galleryWrapper.get('bounds').width);
+            console.log(active_slide, lastPosition, galleryWrapper.get('bounds').width);
         });
         return Gallery;
     }

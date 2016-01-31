@@ -1,7 +1,27 @@
 Promise = require("promise");
 require("whatwg-fetch");
 require("./scripts/utils.js");
-window.global = {};
+window.global = {location:{radius: 500000}};
+var callbackFn = function(location) {
+    console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
+    myUtils.extend(global.location, location);
+    backgroundGeoLocation.finish();
+};
+var failureFn = function(error) {
+    console.log('BackgroundGeoLocation error');
+};
+backgroundGeoLocation.configure(callbackFn, failureFn, {
+    desiredAccuracy: 1000,
+    notificationIconColor: '#4CAF50',
+    notificationTitle: 'Background tracking',
+    notificationText: 'ENABLED',
+    notificationIcon: 'notification_icon',
+    debug: false,
+    stopOnTerminate: true,
+    interval: 30000,
+    fastestInterval: 60000
+});
+backgroundGeoLocation.start();
 tabris.ui.set('background', '#2962FF');
 var drawer = tabris.create("Drawer", {
     layoutData: {
@@ -13,4 +33,21 @@ var drawer = tabris.create("Drawer", {
 });
 tabris.create("PageSelector").appendTo(drawer);
 var main_page = require("./pages/main-page.js").create().open();
-console.log(drawer.find('CollectionView')[0].set('textColor', '#ffffff'))
+/*
+var options = {
+    date: new Date(),
+    titleText: 'Trololo',
+    mode: 'datetime',
+    is24Hour: true,
+    androidTheme: 5
+};
+
+function onSuccess(date) {
+    console.log('Selected date: ' + date);
+}
+
+function onError(error) { // Android only
+    console.log('Error: ' + error);
+}
+
+datePicker.show(options, onSuccess, onError);*/
