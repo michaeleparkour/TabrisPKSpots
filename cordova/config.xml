@@ -1,7 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-packageName="com.pkspots.app" id="com.pkspots.app" version="1.0.0">
   <name>PKSpots</name>
-  <preference name="Fullscreen" value="true" />
+  <platform name="android">
+    <preference name="Fullscreen" value="true" />
+    <preference name="orientation" value="portrait" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="DisallowOverscroll" value="false" />
+    <icon src="../res/36.png" density="ldpi" />
+    <icon src="../res/48.png" density="mdpi" />
+    <icon src="../res/72.png" density="hdpi" />
+    <icon src="../res/96.png" density="xhdpi" />
+  </platform>
   <plugin name="cordova-plugin-dialogs" version="1.1.1" />
-  <plugin name="https://github.com/Moussawi7/Cordova-GPSLocator.git" />
+  <plugin name="https://github.com/mauron85/cordova-plugin-background-geolocation.git" />
 </widget>
