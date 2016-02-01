@@ -53,7 +53,8 @@ exports.create = function () {
                 refreshIndicator: true,
                 refreshMessage: "loading..."
             });
-            myUtils.getPosition().then(function () {
+            myUtils.getPosition().then(function (location) {
+                location && location.coords && myUtils.extend(global.location, location.coords);
                 getSpots();
             }).catch(function () {
                 myUtils.getPositionByIp().then(function (data) {
@@ -76,7 +77,8 @@ exports.create = function () {
             paging: true,
             tabBarLocation: 'top',
             background: "#2962FF",
-            textColor: "#ffffff"
+            textColor: "#ffffff",
+            elevation: 8
         }).appendTo(page);
         var createTab = function (title) {
             return tabris.create("Tab", {

@@ -22,16 +22,35 @@ backgroundGeoLocation.configure(callbackFn, failureFn, {
     fastestInterval: 60000
 });
 backgroundGeoLocation.start();
+//AndroidFullScreen.immersiveMode();
 tabris.ui.set('background', '#2962FF');
 var drawer = tabris.create("Drawer", {
     layoutData: {
-        width: 200
-    },
-    background: "#333",
-    font: "14px Roboto, sans-serif",
-    textColor: "#ffffff"
+        width: 100
+    }
 });
-tabris.create("PageSelector").appendTo(drawer);
+var userComp = tabris.create('Composite',{
+    layoutData: {top: 0, height: 136, left: 0, right: 0}
+}).appendTo(drawer);
+var imageView = tabris.create("ImageView", {
+    image: '/img/user_background.jpg',
+    background: "rgb(220, 220, 220)",
+    scaleMode: 'fill',
+    layoutData: {top: 0, bottom: 0, right: 0, left: 0}
+}).appendTo(userComp);
+var logIn = tabris.create("Button", {
+    classname: "",
+    layoutData: {centerY: 0, centerX:0},
+    font: "16px",
+    background: "#2962FF",
+    textColor: "#FFFFFF",
+    text: "Войти"
+}).appendTo(userComp);
+logIn.on('select', function(){
+    drawer.close();
+    require("./pages/login-page.js").create().open();
+});
+tabris.create("PageSelector",{layoutData: {top: userComp}}).appendTo(drawer);
 var main_page = require("./pages/main-page.js").create().open();
 /*
 var options = {

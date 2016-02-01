@@ -25,7 +25,13 @@ window.myUtils = {
     },
     getPosition: function () {
         return new Promise(function (resolve, reject) {
-            if (window.global && window.global.location.latitude) {
+            if (window.plugins && window.plugins.GPSLocator){
+                window.plugins.GPSLocator.getLocation(function (location) {
+                    resolve({latitude: location[0], longitude: location[1]});
+                }, function (err) {
+                    reject(err);
+                }, {maximumAge: 1000, timeout: 1000});
+            } else if(global.location.latitude && global.location.longitude) {
                 resolve(true);
             } else {
                 reject(false);
@@ -40,6 +46,61 @@ window.PKSpots = {
     API: {
         getSpotsByLocationAndRadius: function (lat, lng, rad) {
             return fetch('http://pkspots.com/API/spots/loc-and-radius/' + lat + '&' + lng + '&' + rad);
+        },
+        checkAuth: function (user) {
+            return fetch('https://pkspots.com/API/user/check-auth', {method: 'post', body: user});
+        },
+        getShortUserInfo: function (user_id) {
+            return fetch('http://pkspots.com/API/user/short-info/' + user_id);
+        },
+        getMarkersByRegion: function (bounds) {
+            return fetch('http://pkspots.com/API/spots/location', {method: 'post', body: bounds});
+        },
+
+        getSpotsByUser: function (id) {
+            return fetch('http://pkspots.com/API//spots/user/' + id);
+        },
+        registerUser: function (user) {
+            return fetch('https://pkspots.com/API/user/register', {method: 'post', body: user});
+        },
+        loginUser: function (user) {
+            return fetch('https://pkspots.com/API/user/login', {method: 'post', body: user});
+        },
+        updateUser: function (user) {
+            return fetch('https://pkspots.com/API/user/update', {method: 'post', body: user});
+        },
+        getDefCategories: function () {
+            return fetch('http://pkspots.com/API/getdefaultcategories');
+        },
+        getSpotRating: function (spot_id) {
+            return fetch('http://pkspots.com/API/get-rating/' + spot_id);
+        },
+        getSpotTraining: function (spot_id) {
+            return fetch('http://pkspots.com/API/get-training/' + spot_id);
+        },
+        getSpotRatingByUser: function (spot_id, user_id) {
+            return fetch('http://pkspots.com/API/get-rating/' + spot_id + '/' + user_id);
+        },
+        getSpotTrainingByUser: function (spot_id, user_id) {
+            return fetch('http://pkspots.com/API/get-training/' + spot_id + '/' + user_id);
+        },
+        addSpotRating: function (review) {
+            return fetch('https://pkspots.com/API/add-rating', {method: 'post', body: review});
+        },
+        addSpotTraining: function (training) {
+            return fetch('https://pkspots.com/API/add-training', {method: 'post', body: training});
+        },
+        addSpot: function (formData) {
+            return fetch('https://pkspots.com/API/addspot', {method: 'post', body: formData});
+        },
+        getCityName: function (url) {
+            return fetch(url);
+        },
+        getSpotsByCity: function (city) {
+            return fetch('http://pkspots.com/API/spots/search/' + city);
+        },
+        addSpotImage: function (formData) {
+            return fetch('http://pkspots.com/API/spot/add-spot-img', {method: 'post', body: formData});
         }
     }
 };
