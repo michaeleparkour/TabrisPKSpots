@@ -27,10 +27,10 @@ window.myUtils = {
         return new Promise(function (resolve, reject) {
             if (window.plugins && window.plugins.GPSLocator){
                 window.plugins.GPSLocator.getLocation(function (location) {
-                    resolve({latitude: location[0], longitude: location[1]});
+                    resolve({coords:{latitude: location[0], longitude: location[1]}});
                 }, function (err) {
                     reject(err);
-                }, {maximumAge: 1000, timeout: 1000});
+                });
             } else if(global.location.latitude && global.location.longitude) {
                 resolve(true);
             } else {
@@ -54,7 +54,7 @@ window.PKSpots = {
             return fetch('http://pkspots.com/API/user/short-info/' + user_id);
         },
         getMarkersByRegion: function (bounds) {
-            return fetch('http://pkspots.com/API/spots/location', {method: 'post', body: bounds});
+            return fetch('http://pkspots.com/API/spots/location', {method: 'post', body: JSON.stringify(bounds)});
         },
 
         getSpotsByUser: function (id) {

@@ -1,0 +1,88 @@
+.leaflet-touch .leaflet-control-locate {
+    border: none;
+}
+.leaflet-control-locate a.leaflet-bar-part {
+    color: #FFFFFF !important;
+    background-color: #FF1744;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.6);
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+}
+.leaflet-control-locate a.leaflet-bar-part span {
+    font-size: 24px;
+    line-height: 56px;
+}
+.leaflet-control-locate a.leaflet-bar-part:hover,
+.leaflet-control-locate a.leaflet-bar-part:active {
+    opacity: 0.8;
+}
+.leaflet-popup-content-wrapper {
+    border-radius: 0;
+    padding: 0;
+}
+.leaflet-popup-close-button {
+    outline: none;
+    font-size: 24px !important;
+}
+.leaflet-popup-content {
+    margin: 0;
+    padding: 0!important;
+    line-height: 1;
+    min-width: 280px !important;
+    width: 100% !important;
+}
+.marker-info .spot-rating {
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    background-color: #2962FF;
+    color: white;
+    padding: 8px;
+    margin-right: 8px;
+}
+.marker-info .spot-rating span {
+    line-height: 36px;
+    border: 1px solid white;
+    display: block;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+.marker-info .spot-rating p {
+    margin: 10px 0 0;
+    font-size: 12px;
+}
+.marker-info .marker-content {
+    padding: 0 10px;
+    float: left;
+    max-width: 170px;
+    width: 100%;
+}
+.marker-info .marker-content p {
+    margin: 7px 0;
+    font-size: 12px;
+    text-align: left;
+}
+.marker-info .marker-content p:last-child {
+    margin: 15px 0 0 0;
+}
+.marker-info img {
+    width: 100%;
+}
+.leaflet-popup-tip-container {
+    margin: -1px auto 0 auto;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}

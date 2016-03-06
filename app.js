@@ -1,5 +1,6 @@
 Promise = require("promise");
 require("whatwg-fetch");
+validate = require("./node_modules/validate.js/");
 require("./scripts/utils.js");
 window.global = {location:{radius: 500000}};
 var callbackFn = function(location) {
@@ -38,6 +39,17 @@ var imageView = tabris.create("ImageView", {
     scaleMode: 'fill',
     layoutData: {top: 0, bottom: 0, right: 0, left: 0}
 }).appendTo(userComp);
+var user = JSON.parse(localStorage.getItem('user'));
+var avatar_source = user && user.avatar ? 'http://pkspots.com/uploads/users/' + user.id + '/small-' + user.avatar : 'img/profile_noimage.gif';
+var avatar = tabris.create("ImageView", {
+    layoutData: {
+        centerY: 0,
+        left: 10,
+        width: 76
+    },
+    image: avatar_source,
+    scaleMode: "fill"
+}).appendTo(userComp);
 var logIn = tabris.create("Button", {
     classname: "",
     layoutData: {centerY: 0, centerX:0},
@@ -46,12 +58,16 @@ var logIn = tabris.create("Button", {
     textColor: "#FFFFFF",
     text: "Войти"
 }).appendTo(userComp);
-logIn.on('select', function(){
+userComp.on('tap', function(){
     drawer.close();
     require("./pages/login-page.js").create().open();
 });
 tabris.create("PageSelector",{layoutData: {top: userComp}}).appendTo(drawer);
 var main_page = require("./pages/main-page.js").create().open();
+var map_page = require("./pages/gen-map.js").create();
+tabris.app.on("StorageEvent", function(arg) {
+    console.log('ololo', arg)
+});
 /*
 var options = {
     date: new Date(),
