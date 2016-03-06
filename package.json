@@ -3,7 +3,7 @@
   "description": "PKSpots",
   "main": "app.js",
   "dependencies": {
-    "tabris": "^1.5.0",
+    "tabris": "^1.6.0",
     "promise": "^6.1.0",
     "whatwg-fetch": "^0.7.0",
     "validate.js" : "^0.8.0"
