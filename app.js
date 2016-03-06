@@ -68,7 +68,6 @@ var map_page = require("./pages/gen-map.js").create();
 tabris.app.on("StorageEvent", function(arg) {
     console.log('ololo', arg)
 });
-/*
 var options = {
     date: new Date(),
     titleText: 'Trololo',
@@ -85,4 +84,4 @@ function onError(error) { // Android only
     console.log('Error: ' + error);
 }
 
-datePicker.show(options, onSuccess, onError);*/
+datePicker.show(options, onSuccess, onError);
