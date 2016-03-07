@@ -8,9 +8,6 @@
     <preference name="KeepRunning" value="true" />
     <preference name="DisallowOverscroll" value="false" />
   </platform>
-  <feature name="Calendar">
-    <param name="android-package" value="nl.xservices.plugins.Calendar" />
-  </feature>
   <plugin name="cordova-plugin-dialogs" />
   <plugin name="cordova-plugin-mauron85-background-geolocation" />
   <plugin name="cordova-plugin-fullscreen" />
@@ -19,5 +16,4 @@
   <plugin name="cordova-plugin-camera" />
   <plugin name="cordova-plugin-imagepicker" />
   <plugin name="cordova-plugin-geofence" />
-  <plugin name="cordova-plugin-calendar" />
 </widget>
