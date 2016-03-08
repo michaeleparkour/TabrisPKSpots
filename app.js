@@ -25,6 +25,7 @@ backgroundGeoLocation.configure(callbackFn, failureFn, {
 backgroundGeoLocation.start();
 //AndroidFullScreen.immersiveMode();
 tabris.ui.set('background', '#2962FF');
+tabris.ui.set('displayMode', 'fullscreen');
 var drawer = tabris.create("Drawer", {
     layoutData: {
         width: 100
@@ -65,9 +66,7 @@ userComp.on('tap', function(){
 tabris.create("PageSelector",{layoutData: {top: userComp}}).appendTo(drawer);
 var main_page = require("./pages/main-page.js").create().open();
 var map_page = require("./pages/gen-map.js").create();
-tabris.app.on("StorageEvent", function(arg) {
-    console.log('ololo', arg)
-});
+/*
 var options = {
     date: new Date(),
     titleText: 'Trololo',
@@ -84,4 +83,4 @@ function onError(error) { // Android only
     console.log('Error: ' + error);
 }
 
-datePicker.show(options, onSuccess, onError);
+datePicker.show(options, onSuccess, onError);*/
