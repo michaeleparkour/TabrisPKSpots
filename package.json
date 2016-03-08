@@ -2,6 +2,7 @@
   "name": "pkspots",
   "description": "PKSpots",
   "main": "app.js",
+  "icon": "/res/72.png",
   "dependencies": {
     "tabris": "^1.6.0",
     "promise": "^6.1.0",
