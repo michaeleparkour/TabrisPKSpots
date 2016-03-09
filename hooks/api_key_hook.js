@@ -11,7 +11,7 @@ module.exports = function(context) {
         .set("value", process.env.ACCESS_TOKEN);
 
     console.log(
-        "Setting API key to: " +
+        "Setting ACCESS_TOKEN to: " +
         cfg.doc
             .findall("plugin/[@name='cordova-plugin-mapbox']")[0]
             .findall("variable/[@name='ACCESS_TOKEN']")[0]
