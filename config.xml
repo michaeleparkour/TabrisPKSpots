@@ -22,5 +22,5 @@
   <plugin name="https://github.com/michaeleparkour/Mapbox.git">
     <variable name="ACCESS_TOKEN" value="" />
   </plugin>
-  <hook src="hooks/api_key_hook.js" type="after_platform_add" />
+ <!-- <hook src="hooks/api_key_hook.js" type="after_platform_add" />-->
 </widget>
