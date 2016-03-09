@@ -14,6 +14,8 @@ exports.create = function () {
             'var map = L.mapbox.map("map", "mapbox.streets").setView(['+global.location.latitude+', '+global.location.longitude+'], 14);var marker = L.userMarker(['+global.location.latitude+', '+global.location.longitude+'],{pulsing:true, accuracy:100, smallIcon:true}).addTo(map);'+
                 'init(map)}())';
             this._nativeCall("evaluate", {script: script});
+        }).on("navigate", function(e){
+            console.log(e)
         }).appendTo(page);
     }
 };

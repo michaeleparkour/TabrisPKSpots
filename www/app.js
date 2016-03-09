@@ -65,6 +65,7 @@ userComp.on('tap', function(){
 tabris.create("PageSelector",{layoutData: {top: userComp}}).appendTo(drawer);
 var main_page = require("./pages/main-page.js").create().open();
 var map_page = require("./pages/gen-map.js").create();
+console.log(tabris.WebView._events)
 /*
 var options = {
     date: new Date(),
