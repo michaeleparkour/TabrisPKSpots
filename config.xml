@@ -19,8 +19,8 @@
   <plugin name="cordova-plugin-camera" />
   <plugin name="cordova-plugin-imagepicker" />
   <plugin name="cordova-plugin-calendar" />
-  <plugin name="https://github.com/michaeleparkour/Mapbox.git">
+  <plugin name="https://github.com/Telerik-Verified-Plugins/Mapbox">
     <variable name="ACCESS_TOKEN" value="" />
   </plugin>
- <!-- <hook src="hooks/api_key_hook.js" type="after_platform_add" />-->
+  <hook src="hooks/api_key_hook.js" type="after_platform_add" />
 </widget>
