@@ -23,7 +23,6 @@ backgroundGeoLocation.configure(callbackFn, failureFn, {
     fastestInterval: 60000
 });
 backgroundGeoLocation.start();
-//AndroidFullScreen.immersiveMode();
 tabris.ui.set('background', '#2962FF');
 tabris.ui.set('displayMode', 'fullscreen');
 var drawer = tabris.create("Drawer", {
