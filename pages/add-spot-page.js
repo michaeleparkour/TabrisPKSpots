@@ -38,6 +38,5 @@ exports.create = function () {
             });
         }
     }
-
     return page;
 };
