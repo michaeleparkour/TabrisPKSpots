@@ -25,6 +25,7 @@
   <plugin name="cordova-plugin-camera" />
   <plugin name="cordova-plugin-imagepicker" />
   <plugin name="cordova-plugin-calendar" />
+  <preference name="ACCESS_TOKEN" value="pk.eyJ1IjoibWljaGFlbGVwYXJrb3VyIiwiYSI6ImNpanYyN2l0NDAwMjB1OW00NTBkY3F4Y3gifQ.Pom1NlIj8kR-U8WGNaWcrA" />
   <plugin name="https://github.com/Telerik-Verified-Plugins/Mapbox">
     <variable name="ACCESS_TOKEN" value="" />
   </plugin>

@@ -10,13 +10,7 @@ module.exports = function(context) {
         .findall("variable/[@name='ACCESS_TOKEN']")[0]
         .set("value", process.env.ACCESS_TOKEN);
 
-    console.log(
-        "Setting ACCESS_TOKEN to: " +
-        cfg.doc
-            .findall("plugin/[@name='https://github.com/Telerik-Verified-Plugins/Mapbox']")[0]
-            .findall("variable/[@name='ACCESS_TOKEN']")[0]
-            .get("value")
-    );
+    console.log(cfg);
 
     cfg.write();
 };
