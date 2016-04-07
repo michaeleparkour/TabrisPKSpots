@@ -10,7 +10,7 @@ module.exports = function(context) {
         .findall("variable/[@name='ACCESS_TOKEN']")[0]
         .set("value", process.env.ACCESS_TOKEN);
 
-    console.log(cfg);
+    console.log(process.env.ACCESS_TOKEN);
 
     cfg.write();
 };
