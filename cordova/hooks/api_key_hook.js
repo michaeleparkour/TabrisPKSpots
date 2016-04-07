@@ -6,7 +6,7 @@ module.exports = function(context) {
     var cfg = new ConfigParser(xml);
 
     cfg.doc
-        .findall("plugin/[@name=https://github.com/Telerik-Verified-Plugins/Mapbox']")[0]
+        .findall("plugin/[@name='https://github.com/Telerik-Verified-Plugins/Mapbox']")[0]
         .findall("variable/[@name='ACCESS_TOKEN']")[0]
         .set("value", process.env.ACCESS_TOKEN);
 
