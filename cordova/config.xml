@@ -7,6 +7,12 @@
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="KeepRunning" value="true" />
     <preference name="DisallowOverscroll" value="false" />
+    <icon src="res/36.png" density="ldpi" />
+    <icon src="res/48.png" density="mdpi" />
+    <icon src="res/72.png" density="hdpi" />
+    <icon src="res/96.png" density="xhdpi" />
+    <icon src="res/144.png" density="xxhdpi" />
+    <icon src="res/192.png" density="xxxhdpi" />
   </platform>
   <feature name="Calendar">
     <param name="android-package" value="nl.xservices.plugins.Calendar" />
