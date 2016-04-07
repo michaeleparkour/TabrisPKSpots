@@ -1,4 +1,4 @@
-validate = require("../node_modules/validate.js/");
+validate = require("./node_modules/validate.js/");
 require("./scripts/utils.js");
 getIconSrc = require("./scripts/icons.js").getIconSrc;
 getIcon = require("./scripts/icons.js").getIcon;
@@ -36,7 +36,7 @@ function initUser() {
         layoutData: {top: 0, height: 136, left: 0, right: 0}
     }).appendTo(drawer);
     var imageView = new tabris.ImageView({
-        image: 'www/img/user_background.jpg',
+        image: 'img/user_background.jpg',
         background: "rgb(220, 220, 220)",
         scaleMode: 'fill',
         layoutData: {top: 0, bottom: 0, right: 0, left: 0},
@@ -44,7 +44,7 @@ function initUser() {
         cornerRadius: 100
     }).appendTo(userComp);
     var user = JSON.parse(localStorage.getItem('user'));
-    var avatar_source = user && user.avatar ? 'http://pkspots.com/uploads/users/' + user.id + '/small-' + user.avatar : 'www/img/profile_noimage.gif';
+    var avatar_source = user && user.avatar ? 'http://pkspots.com/uploads/users/' + user.id + '/small-' + user.avatar : 'img/profile_noimage.gif';
     var avatar = new tabris.ImageView({
         layoutData: {
             centerY: 0,

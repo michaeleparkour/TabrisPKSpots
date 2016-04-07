@@ -6,6 +6,7 @@ exports.create = function () {
 
     function createAddSpotPage() {
         var user = JSON.parse(localStorage.getItem('user'));
+        if (!user) return false;
         var formData = {
             user_id: user.id,
             api_key: user.api_key

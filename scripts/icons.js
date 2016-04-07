@@ -1,6 +1,6 @@
 var scaleFactor = tabris.device.get("scaleFactor");
 function getIcon(name, size, color) {
-    var path = 'www/img/icons/' + scaleFactor + 'x/';
+    var path = 'img/icons/' + scaleFactor + 'x/';
     size = size || '24';
     color = color || 'white';
     return path + 'ic_'+ name + '_'+ color + '_' + size + 'dp' + '.png';
