@@ -16,7 +16,7 @@ exports.create = function (settings) {
     if (!settings.slides || !settings.slides.length) {
         return false;
     } else {
-        var Gallery = tabris.create("Composite", {
+        var Gallery = new tabris.Composite({
             layoutData: {
                 top: 0,
                 left: 0,
@@ -26,7 +26,7 @@ exports.create = function (settings) {
             background: "#eee"
         });
         var galleryState = "right", slide_images = [], slides = settings.slides.length - 1, active_slide = 0, dragOffset, lastPosition = 0, slide_width = Gallery.get('bounds').width;
-        var galleryWrapper = tabris.create("Composite", {
+        var galleryWrapper = new tabris.Composite({
             layoutData: {
                 top: 0,
                 left: 0,
@@ -41,7 +41,7 @@ exports.create = function (settings) {
             settings.slides.forEach(function (slide, i) {
                 var left = 0;
                 if (prev_slide) left = [prev_slide, 0];
-                prev_slide = tabris.create("ImageView", {
+                prev_slide = new tabris.ImageView({
                     layoutData: {
                         top: 0,
                         left: left,

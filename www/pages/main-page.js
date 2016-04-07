@@ -1,7 +1,8 @@
 exports.create = function () {
-    var page = tabris.create("Page", {
+    var page = new tabris.Page({
         title: "Главная",
-        topLevel: true
+        topLevel: true,
+        image: getIcon('home', '48', 'black')
     }).once('appear', createMainPage);
 
     function createMainPage() {
@@ -53,10 +54,10 @@ exports.create = function () {
                 refreshIndicator: true,
                 refreshMessage: "loading..."
             });
-            myUtils.getPosition().then(function (location) {
+/*            myUtils.getPosition().then(function (location) {
                 location && location.coords && myUtils.extend(global.location, location.coords);
                 getSpots();
-            }).catch(function () {
+            }).catch(function () {*/
                 myUtils.getPositionByIp().then(function (data) {
                     data = JSON.parse(data._bodyInit);
                     var lat = parseFloat(data.geoplugin_latitude);
@@ -68,10 +69,10 @@ exports.create = function () {
                 }).catch(function (err) {
                     console.log(err)
                 })
-            })
+            //})
         }
 
-        var tabFolder = tabris.create("TabFolder", {
+        var tabFolder = new tabris.TabFolder({
             id: "mainTab",
             layoutData: {left: 0, top: 0, right: 0, bottom: 0},
             paging: true,
@@ -81,7 +82,7 @@ exports.create = function () {
             elevation: 8
         }).appendTo(page);
         var createTab = function (title) {
-            return tabris.create("Tab", {
+            return new tabris.Tab({
                 title: title,
                 background: "#eee"
             }).appendTo(tabFolder);

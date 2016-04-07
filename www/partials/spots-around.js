@@ -13,7 +13,7 @@ exports.create = function() {
             easing: "ease-in-out"
         });
     };
-    return tabris.create("CollectionView", {
+    return new tabris.CollectionView({
         layoutData: {
             left: 0,
             top: 0,
@@ -23,7 +23,7 @@ exports.create = function() {
         itemHeight: 150,
         refreshEnabled: true,
         initializeCell: function (cell) {
-            var cell_back = tabris.create("Composite", {
+            var cell_back = new tabris.Composite({
                 layoutData: {
                     top: 0,
                     left: 0,
@@ -32,7 +32,7 @@ exports.create = function() {
                 },
                 background: "#eee"
             }).appendTo(cell);
-            var card = tabris.create("Composite", {
+            var card = new tabris.Composite({
                 layoutData: {
                     top: 5,
                     left: 10,
@@ -41,7 +41,7 @@ exports.create = function() {
                 },
                 background: "#fff"
             }).appendTo(cell_back);
-            var imageView = tabris.create("ImageView", {
+            var imageView = new tabris.ImageView({
                 layoutData: {
                     top: 0,
                     left: 0,
@@ -50,7 +50,7 @@ exports.create = function() {
                 },
                 scaleMode: 'fill'
             }).appendTo(card);
-            var card_info = tabris.create("Composite", {
+            var card_info = new tabris.Composite({
                 layoutData: {
                     top: 0,
                     left: [imageView, 16],
@@ -59,7 +59,7 @@ exports.create = function() {
                 font: "14px Roboto, sans-serif",
                 textColor: "#333"
             });
-            var title = tabris.create("TextView", {
+            var title = new tabris.TextView({
                 layoutData: {
                     left: 0,
                     top: 5,
@@ -69,7 +69,7 @@ exports.create = function() {
                 font: "bold 18px",
                 textColor: "#000"
             }).appendTo(card_info);
-            var category = tabris.create("TextView", {
+            var category = new tabris.TextView({
                 layoutData: {
                     left: 0,
                     top: [title, 5],
@@ -78,7 +78,7 @@ exports.create = function() {
                 alignment: "left",
                 textColor: "#444"
             }).appendTo(card_info);
-            var author = tabris.create("TextView", {
+            var author = new tabris.TextView({
                 layoutData: {
                     left: 0,
                     top: [category, 5],
@@ -87,7 +87,7 @@ exports.create = function() {
                 alignment: "left",
                 textColor: "#444"
             }).appendTo(card_info);
-            var card_border = tabris.create("Composite", {
+            var card_border = new tabris.Composite({
                 layoutData: {
                     top: [card_info, 8],
                     left: [imageView, 0],
@@ -96,7 +96,7 @@ exports.create = function() {
                 },
                 background: "#eee"
             }).appendTo(card);
-            var bottom_bar = tabris.create("Composite", {
+            var bottom_bar = new tabris.Composite({
                 layoutData: {
                     left: [imageView, 16],
                     top: [card_border, 0],
@@ -104,13 +104,13 @@ exports.create = function() {
                     bottom: 0
                 }
             }).appendTo(card);
-            var distance = tabris.create("TextView", {
+            var distance = new tabris.TextView({
                 layoutData: {centerY: 0},
                 alignment: "left",
                 font: "16px",
                 textColor: "#333"
             }).appendTo(bottom_bar);
-            var more = tabris.create("Button", {
+            var more = new tabris.Button({
                 classname: "",
                 layoutData: {centerY: 0, right: 0},
                 font: "16px",

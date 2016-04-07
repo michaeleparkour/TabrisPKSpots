@@ -26,7 +26,7 @@ exports.create = function (item) {
     var detailsInfoCard = tabris.create("Composite", {
         layoutData: {
             left: 0,
-            top: Gallery,
+            top: [Gallery, 56],
             right: 0,
             bottom: 0
         }
@@ -34,11 +34,12 @@ exports.create = function (item) {
     var topInfoBar = tabris.create("Composite", {
         layoutData: {
             left: 0,
-            top: 0,
+            top: 260,
             right: 0,
             height: 56
-        }
-    }).appendTo(detailsInfoCard);
+        },
+        background: "#fff"
+    }).appendTo(scrollView);
     var rating = tabris.create("Composite", {
         layoutData: {
             top: 0,
@@ -81,22 +82,14 @@ exports.create = function (item) {
     }).appendTo(topInfoBar);
     var border = tabris.create("Composite", {
         layoutData: {
-            top: [topInfoBar, -1],
+            top: 57,
             left: 0,
             right: 0,
             height: 1
         },
         background: "#e9e9e9"
-    }).appendTo(detailsInfoCard);
-    var detailsList = tabris.create("Composite", {
-        layoutData: {
-            left: 0,
-            top: border,
-            right: 0,
-            height: 100
-        },
-        background: "#ECEFF1"
-    }).appendTo(detailsInfoCard);
+    }).appendTo(topInfoBar);
+    var detailsList = require("../partials/spot-details-list.js").create(item).appendTo(detailsInfoCard);
     var description = tabris.create("TextView", {
         layoutData: {
             top: [detailsList, 16],
@@ -112,6 +105,16 @@ exports.create = function (item) {
     }).appendTo(detailsInfoCard).on('tap', function(widget){
         var multiline = widget.get('maxLines') == 1 ? 1000 : 1;
         widget.set('maxLines', multiline);
+    });
+    var topInfoBarY = 0;
+    scrollView.on("scroll", function(widget, offset) {
+        Gallery.set("transform", {translationY: Math.max(0, offset.y * 0.2)});
+        topInfoBar.set("transform", {translationY: Math.max(0, offset.y - topInfoBarY)});
+    });
+    scrollView.on("resize", function(widget, bounds) {
+        var topInfoBarHeight = topInfoBar.get("height");
+        topInfoBarY = Math.min(260 + topInfoBarHeight, 260);
+        topInfoBar.set("top", topInfoBarY)
     });
     return page;
 };

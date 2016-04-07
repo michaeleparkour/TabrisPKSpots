@@ -6,7 +6,7 @@ exports.create = function () {
     function createMapPage() {
         var webview = tabris.create("WebView", {
             layoutData: {left: 0, top: 0, right: 0, bottom: 0},
-            url: tabris.app.getResourceLocation('pages/general-map.html') + '?' + new Date().getTime()
+            url: tabris.app.getResourceLocation('www/pages/general-map.html') + '?' + new Date().getTime()
         }).on("load", function (widget) {
             var height = parseInt(screen.height-76);
             var script = '(function() {document.body.style.height = "' + height + 'px";'+

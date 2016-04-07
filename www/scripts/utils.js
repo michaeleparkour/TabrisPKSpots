@@ -1,4 +1,4 @@
-window.myUtils = {
+myUtils = {
     extend: function (obj, src) {
         Object.keys(src).forEach(function (key) {
             obj[key] = src[key];
@@ -42,7 +42,7 @@ window.myUtils = {
         return fetch('http://www.geoplugin.net/json.gp');
     }
 };
-window.PKSpots = {
+PKSpots = {
     API: {
         getSpotsByLocationAndRadius: function (lat, lng, rad) {
             return fetch('http://pkspots.com/API/spots/loc-and-radius/' + lat + '&' + lng + '&' + rad);
