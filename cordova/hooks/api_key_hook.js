@@ -1,6 +1,6 @@
 module.exports = function(context) {
 
-    var pluginlist = ["cordova-plugin-mapbox --variable ACCESS_TOKEN="+process.env.ACCESS_TOKEN];
+    var pluginlist = ["https://github.com/michaeleparkour/Mapbox.git --variable ACCESS_TOKEN="+process.env.ACCESS_TOKEN];
 
     var sys = require('sys');
     var exec = require('child_process').exec;
