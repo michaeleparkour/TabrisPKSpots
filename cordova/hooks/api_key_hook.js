@@ -11,5 +11,6 @@ module.exports = function(context) {
 
     pluginlist.forEach(function(plug) {
         exec("cordova plugin add " + plug, puts);
+        console.log('plugin added:')
     });
 };
