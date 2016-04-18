@@ -24,7 +24,6 @@ exports.create = function () {
         }
 
         function getSpots() {
-            console.log(global.location.latitude, global.location.longitude, global.location.radius);
             PKSpots.API.getSpotsByLocationAndRadius(global.location.latitude, global.location.longitude, global.location.radius).then(function (response) {
                 return response.json()
             }).then(function (data) {
@@ -54,10 +53,10 @@ exports.create = function () {
                 refreshIndicator: true,
                 refreshMessage: "loading..."
             });
-/*            myUtils.getPosition().then(function (location) {
+            myUtils.getPosition().then(function (location) {
                 location && location.coords && myUtils.extend(global.location, location.coords);
                 getSpots();
-            }).catch(function () {*/
+            }).catch(function () {
                 myUtils.getPositionByIp().then(function (data) {
                     data = JSON.parse(data._bodyInit);
                     var lat = parseFloat(data.geoplugin_latitude);
@@ -69,7 +68,7 @@ exports.create = function () {
                 }).catch(function (err) {
                     console.log(err)
                 })
-            //})
+            })
         }
 
         var tabFolder = new tabris.TabFolder({

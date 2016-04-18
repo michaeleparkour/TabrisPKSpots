@@ -2,16 +2,13 @@
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
-    <script src="//api.mapbox.com/mapbox.js/v2.3.0/mapbox.js"></script>
-    <script src="../scripts/L.UserMarker.js"></script>
-    <script src="../scripts/PruneCluster.js"></script>
     <script src="//www.promisejs.org/polyfills/promise-6.1.0.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/0.11.0/fetch.min.js"></script>
     <script src="../scripts/utils.js?123"></script>
-    <link href="https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css" rel="stylesheet"/>
-    <link href="../styles/user_marker.css" rel="stylesheet"/>
-    <link href="../styles/PruneCluster.css" rel="stylesheet"/>
     <link href="../styles/app.css?112" rel="stylesheet"/>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAhIJyb-Uc9rqax1kXVdhX7u74hAfPLW8Y"></script>
+    <script src="../scripts/gmaps-cluster.js"></script>
+    <script src="../scripts/gmaps-user-marker.js"></script>
     <style>
         body {
             margin: 0;
@@ -31,83 +28,86 @@
 <body>
 
 <div id="map"></div>
-<script>
-    console.log(window.widget)
-    function init(map){
-        var markers = new PruneClusterForLeaflet();
-        var scope_markers = [];
-        var categoryIcon = L.Icon.extend({
-            options: {
-                iconSize: [48, 48],
-                popupAnchor: [0, -17]
-            }
-        });
-        map.on('dragend', getMarkers);
-        map.on('zoomend', getMarkers);
+<script type="text/javascript">
+    document.body.style.height = window.innerHeight + 'px';
+    var center = {lat: parseFloat(user_location.latitude), lng: parseFloat(user_location.longitude)};
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17
+    });
+    function initMap() {
+        map.setCenter(center);
+        //var GeoMarker = new GeolocationMarker(map);
+        google.maps.event.trigger(map, 'resize');
+        map.addListener('dragend', getMarkers);
+        map.addListener('zoom_changed', getMarkers);
+        window.ff = map;
         getMarkers();
-        function getMarkers() {
-            var locationBounds = {};
-            var latLngBounds = map.getBounds();
-            console.log(latLngBounds);
-            locationBounds.minlat = latLngBounds._southWest.lat;
-            locationBounds.minlng = latLngBounds._southWest.lng;
-            locationBounds.maxlat = latLngBounds._northEast.lat;
-            locationBounds.maxlng = latLngBounds._northEast.lng;
-            PKSpots.API.getMarkersByRegion(locationBounds).then(function (response) {
-                return response.json()
-            }).then(function (data) {
-                        for (i = 0; i < data.length; i++) {
-                            var current = data[i].id;
-                            if (data[i].category == 'Зал') {
-                                var icon = new categoryIcon({iconUrl: '../img/zal-map-marker.png'});
-                            }
-                            else if (data[i].category == 'Детская площадка') {
-                                icon = new categoryIcon({iconUrl: '../img/child-map-marker.png'});
-                            }
-                            else if (data[i].category == 'Паркур-площадка') {
-                                icon = new categoryIcon({iconUrl: '../img/pk-map-marker.png'});
-                            }
-                            else if (data[i].category == 'Спорт-площадка') {
-                                icon = new categoryIcon({iconUrl: '../img/sport-map-marker.png'});
-                            }
-                            else if (data[i].category == 'Стройка') {
-                                icon = new categoryIcon({iconUrl: '../img/stroyka-map-marker.png'});
-                            }
-                            else {
-                                icon = new categoryIcon({iconUrl: '../img/unk-map-marker.png'});
-                            }
-                            if (scope_markers.length < 1) {
-                                var m = new PruneCluster.Marker(parseFloat(data[i].lat), parseFloat(data[i].lng), {
-                                    popup: '<div class="marker-info"><div class="spot-rating"><span>' + data[i].rating + '</span><p>' + data[i].people_rated + ' чел.</p></div><div class="marker-content"><p class="title">' + data[i].name + '</p><p class="category">' + data[i].category + '</p><p class="author">' + data[i].first_name + ' ' + data[i].last_name + '</p></div><div class="clearfix"></div>',
-                                    icon: icon
-                                });
-                                scope_markers.push(current);
-                                markers.RegisterMarker(m);
-                                map.addLayer(markers);
-                            }
-                            if (scope_markers.length > 0) {
-                                if (scope_markers.indexOf(current.toString()) == -1) {
-                                    m = new PruneCluster.Marker(parseFloat(data[i].lat), parseFloat(data[i].lng), {
-                                        popup: '<div class="marker-info"><div class="spot-rating"><span>' + data[i].rating + '</span><p>' + data[i].people_rated + ' чел.</p></div><div class="marker-content"><p class="title">' + data[i].name + '</p><p class="category">' + data[i].category + '</p><p class="author">' + data[i].first_name + ' ' + data[i].last_name + '</p></div><div class="clearfix"></div></div',
-                                        icon: icon
-                                    });
-                                    scope_markers.push(current);
-                                    markers.RegisterMarker(m);
-                                }
-                            }
+    }
+    function getMarkers() {
+        var locationBounds = {};
+        var latLngBounds = map.getBounds();
+        locationBounds.minlat = latLngBounds.R.R;
+        locationBounds.minlng = latLngBounds.j.j;
+        locationBounds.maxlat = latLngBounds.R.j;
+        locationBounds.maxlng = latLngBounds.j.R;
+        var mc = new MarkerClusterer(map);
+        var scope_markers = [];
+        PKSpots.API.getMarkersByRegion(locationBounds).then(function (response) {
+            return response.json()
+        })
+                .then(function (data) {
+                    for (i = 0; i < data.length; i++) {
+                        var current = data[i].id;
+                        if (data[i].category == 'Зал') {
+                            var icon ='../img/zal-map-marker.png';
                         }
-                        markers.ProcessView();
-                    })
-                    .catch(function (err) {
-                        console.log(err)
-                        navigator.notification.alert(
-                                'Нет связи с сервером, попробуйте еще раз',  // message
-                                null,         // callback
-                                'Ошибка',            // title
-                                'OK'                  // buttonName
-                        );
-                    });
-        }
+                        else if (data[i].category == 'Детская площадка') {
+                            icon = '../img/child-map-marker.png';
+                        }
+                        else if (data[i].category == 'Паркур-площадка') {
+                            icon = '../img/pk-map-marker.png';
+                        }
+                        else if (data[i].category == 'Спорт-площадка') {
+                            icon = '../img/sport-map-marker.png';
+                        }
+                        else if (data[i].category == 'Стройка') {
+                            icon = '../img/stroyka-map-marker.png';
+                        }
+                        else {
+                            icon = '../img/unk-map-marker.png';
+                        }
+                        if (scope_markers.indexOf(current.toString()) == -1) {
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat(data[i].lat), lng: parseFloat(data[i].lng)},
+                                map: map,
+                                icon: icon
+                            });
+                            scope_markers.push(current);
+                            mc.addMarker(marker)
+                        }
+                        if (scope_markers.length < 1) {
+/*                            var m = new PruneCluster.Marker(parseFloat(data[i].lat), parseFloat(data[i].lng), {
+                                popup: '<div class="marker-info"><div class="spot-rating"><span>' + data[i].rating + '</span><p>' + data[i].people_rated + ' чел.</p></div><div class="marker-content"><p class="title">' + data[i].name + '</p><p class="category">' + data[i].category + '</p><p class="author">' + data[i].first_name + ' ' + data[i].last_name + '</p></div><div class="clearfix"></div>',
+                                icon: icon
+                            });*/
+                        }
+                        if (scope_markers.length > 0) {
+
+                        }
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err)
+                    navigator.notification.alert(
+                            'Нет связи с сервером, попробуйте еще раз',  // message
+                            null,         // callback
+                            'Ошибка',            // title
+                            'OK'                  // buttonName
+                    );
+                });
+    }
+    window.onload = function () {
+        initMap();
     }
 </script>
 </body>

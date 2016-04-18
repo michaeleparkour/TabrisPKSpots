@@ -3,21 +3,73 @@ exports.create = function (page) {
         id: "scrollForm",
         layoutData: {top: 0, bottom: 0, left: 0, right: 0}
     }).appendTo(page);
+    var imageComposite = new tabris.Composite({
+        layoutData: {top: 0, left: 0, right: 0, height: 230}
+    }).appendTo(scrollComp);
+    var spot_image = new tabris.ImageView({
+        layoutData: {
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+        },
+        image: '../img/placeholder-image.gif',
+        scaleMode: 'fill',
+        background: '#ccc'
+    }).appendTo(imageComposite);
+    var fab = require("../partials/fab-button.js").create();
+    fab.set('layoutData', {top:[imageComposite, -28], right: 16}).on("tap",function () {
+        takePic();
+    }).appendTo(scrollComp);
+    if (navigator.camera) {
+        var takePic = function () {
+            var options = {
+                quality: 75,
+                destinationType: 1,
+                sourceType: 1,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                targetWidth: 1200,
+                targetHeight: 1600,
+                correctOrientation: true,
+                encodingType: 0     // 0=JPG 1=PNG
+            };
+            navigator.camera.getPicture(onSuccess, onFail, options);
+        };
+        var takeFromGallery = function () {
+            var options = {
+                quality: 75,
+                destinationType: 2,
+                sourceType: 2,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+                correctOrientation: true,
+                encodingType: 0     // 0=JPG 1=PNG
+            };
+            navigator.camera.getPicture(onSuccess, onFail, options);
+        };
+    }
+    var onSuccess = function (DATA_URL) {
+        console.log(tabris.app.getResourceLocation(DATA_URL))
+        spot_image.set('image', DATA_URL)
+    };
+    var onFail = function (e) {
+        navigator.notification.alert(
+            'Ошибка: ' + e,  // message
+            null,         // callback
+            'Ошибка',            // title
+            'OK'                  // buttonName
+        );
+        console.log("Ошибка: " + e);
+    };
+    var formComposite = new tabris.Composite({
+        layoutData: {top: [imageComposite, 10], left: 0, right: 0}
+    }).appendTo(scrollComp);
     var form = new tabris.Composite({
         id: "form",
-        layoutData: {top: 30, left: 30, right: 30}
-    }).appendTo(scrollComp);
-    new tabris.TextView({
-        alignment: "center",
-        text: "Добавление спота",
-        font: "bold 24px",
-        class: "full-width"
-    }).appendTo(form);
+        layoutData: {top: 0, left: 30, right: 30}
+    }).appendTo(formComposite);
     new tabris.TextView({
         id: "spotNameLabel",
         alignment: "left",
         layoutData: {
-            top: "prev() 50"
+            top: "prev() 20"
         },
         text: "Spot Title:"
     }).appendTo(form);
@@ -149,5 +201,15 @@ exports.create = function (page) {
         spot_category.set('items', data);
     });
     validateForm();
+/*    var formCompositeY = 0;
+    scrollComp.on("scroll", function(widget, offset) {
+        imageComposite.set("transform", {translationY: Math.max(0, offset.y * 0.2)});
+        formComposite.set("transform", {translationY: Math.max(0, offset.y - formCompositeY)});
+    });
+    scrollComp.on("resize", function(widget, bounds) {
+        var formCompositeHeight = formComposite.get("height");
+        formCompositeY = Math.min(260 + formCompositeHeight, 260);
+        formComposite.set("top", formCompositeY)
+    });*/
     return scrollComp;
 };

@@ -23,15 +23,20 @@ myUtils = {
         var ad = Math.atan2(y, x);
         return (ad * R / 1000).toFixed(3);
     },
+    getParameterFromUrl: function (url, name) {
+        var regexp = new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)");
+        var value = (regexp.exec(url) || [null, ""])[1].replace(/\+/g, "%20");
+        return decodeURIComponent(value) || null;
+    },
     getPosition: function () {
         return new Promise(function (resolve, reject) {
-            if (window.plugins && window.plugins.GPSLocator){
+            if (window.plugins && window.plugins.GPSLocator) {
                 window.plugins.GPSLocator.getLocation(function (location) {
-                    resolve({coords:{latitude: location[0], longitude: location[1]}});
+                    resolve({coords: {latitude: location[0], longitude: location[1]}});
                 }, function (err) {
                     reject(err);
                 });
-            } else if(global.location.latitude && global.location.longitude) {
+            } else if (global.location.latitude && global.location.longitude) {
                 resolve(true);
             } else {
                 reject(false);
